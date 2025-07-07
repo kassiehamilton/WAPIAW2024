@@ -1,0 +1,229 @@
+---
+title: "brain_visual"
+author: "Lexi Luo"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r}
+# Enable this universe
+#options(repos = c(
+#  ggseg = 'https://ggseg.r-universe.dev',
+#  CRAN = 'https://cloud.r-project.org'))
+
+# Install some packages
+#install.packages('ggsegExtra')
+
+# Enable this universe
+#options(repos = c(
+#    ggseg = 'https://ggseg.r-universe.dev',
+#    CRAN = 'https://cloud.r-project.org'))
+
+# Install some packages
+#install.packages('ggsegSchaefer')
+```
+```{r}
+library(dplyr)
+library(ggseg)
+library(ggseg3d)
+library(ggplot2)
+library(gridExtra) 
+library(ggsegDKT)
+library(ggsegSchaefer)
+library(ggsegGlasser)
+library(stringr)
+```
+```{r}
+base_dir <- "<work_folder>"
+```
+
+
+
+# figure for dkt area
+```{r}
+data("dkt")
+dkt_df <- as.data.frame(dkt)
+brain_data <- read.csv(
+  file.path(base_dir,
+            "table_for_figures_fullnetmats_schaefer_only",
+            "neu",
+            "df_area.csv")
+)
+# merge the estimate with dkt maps
+colnames(brain_data)[colnames(brain_data) == "index"] <- "label"
+dkt_df$label<-sub("_", "", dkt_df$label)
+brain_data$label<-sub("area","",brain_data$IDP_name)
+data <- merge(brain_data, dkt_df, by = "label")
+data$Significance_binary <- ifelse(data$Significance == 'True', 0.25, 0)
+```
+
+```{r}
+data_dkt <- data %>%
+  filter(atlas == "dkt", type == "cortical")
+
+# Plot 1: Significance binary
+plot1 <- ggplot(data_dkt) +
+  geom_brain(atlas = dkt, aes(fill = Significance_binary)) +
+  scale_fill_gradient2(low = "blue", mid = "white", high = "yellow", midpoint = 0, limits = c(-0.25, 0.25)) +
+  guides(fill = "none") +
+  theme_void()
+
+# Plot 2: Estimate
+plot2 <- ggplot(data_dkt) +
+  geom_brain(atlas = dkt, aes(fill = estimate_no_covar)) +
+  scale_fill_gradient2(low = "blue", mid = "white", high = "red", midpoint = 0, limit = c(-0.1, 0.1)) +
+  theme_void() +
+  guides(fill = "none") +
+  theme(plot.title = element_text(hjust = 0.5, size = 14))
+
+# Combine
+gridExtra::grid.arrange(plot1, plot2, heights = c(1, 2))
+
+```
+
+# figure for dkt volume, add aseg
+
+```{r}
+#add aseg
+data("aseg")
+aseg_df<-as.data.frame(aseg)
+aseg_df <- aseg_df %>%
+  mutate(label = label %>%
+           str_replace_all("Left", "L") %>%
+           str_replace_all("Right", "R") %>%
+           str_replace_all("-", ""))
+```
+
+```{r}
+data("dkt")
+dkt_df <- as.data.frame(dkt)
+dkt_df$label<-sub("_", "", dkt_df$label)
+brain_data <- read.csv(
+  file.path(
+    base_dir,
+    "table_for_figures_fullnetmats_schaefer_only",
+    "neu",
+    "df_volume.csv"
+  )
+)
+#brain_data <- brain_data %>%
+#  mutate(across(c(estimate_neu, estimate_dep), abs)) 
+#brain_data <- brain_data %>% filter(phen_group == phe)
+colnames(brain_data)[colnames(brain_data) == "index"] <- "label"
+brain_data$label<-sub("volume","",brain_data$IDP_name)
+data <- merge(brain_data, dkt_df, by = "label", all = TRUE)
+data$Significance_binary <- ifelse(data$Significance == 'True', 0.25, 0)
+```
+```{r}
+data_aseg<-brain_data%>% filter(Yeo_name == "Subcortical")
+data_aseg$label<-sub("FS","",data_aseg$label)
+data_aseg<-merge(data_aseg,aseg_df,by="label")
+data_aseg$Significance_binary <- ifelse(data_aseg$Significance == 'True', 0.25, 0)
+
+plot1<-ggplot(data_aseg) +
+        geom_brain(atlas = aseg, aes(fill = estimate_no_covar), side = "coronal") +
+        scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0, limit = c(-0.1, 0.1)) +
+  guides(fill = "none") +
+        theme_void()
+
+plot2<-ggplot(data) +
+        geom_brain(atlas = dkt, aes(fill = estimate_no_covar)) +
+        scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0, limit = c(-0.1, 0.1)) +
+        theme_void()  +
+        guides(fill = "none") +
+        theme(plot.title = element_text(hjust = 0.5, size = 14))
+plot3<-ggplot(data) +
+        geom_brain(atlas = dkt, aes(fill = Significance_binary)) +
+        scale_fill_gradient2(low = "blue", high = "yellow", mid = "white", midpoint = 0, limit = c(-0.25, 0.25)) +
+        theme_void()  +
+        guides(fill = "none") +
+        theme(plot.title = element_text(hjust = 0.5, size = 14))
+grid.arrange(plot3, plot2, plot1, 
+             ncol = 1)  
+
+
+```
+#figure for thickness
+```{r}
+data("dkt")
+dkt_df <- as.data.frame(dkt)
+brain_data <- read.csv(
+  file.path(
+    base_dir,
+    "table_for_figures_fullnetmats_schaefer_only",
+    "neu",
+    "df_thickness.csv"
+  )
+)
+colnames(brain_data)[colnames(brain_data) == "index"] <- "label"
+dkt_df$label<-sub("_", "", dkt_df$label)
+brain_data$label<-sub("thickness","",brain_data$IDP_name)
+data <- merge(brain_data, dkt_df, by = "label")
+data$Significance_binary <- ifelse(data$Significance == 'True', 0.25, 0)
+```
+```{r}
+data_dkt <- data %>% filter(atlas == "dkt")
+plot2<-ggplot(data_dkt) +
+        geom_brain(atlas = dkt, aes(fill = estimate_no_covar)) +
+        scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0, limit = c(-0.1, 0.1)) +
+        theme_void()  +
+  guides(fill = "none") +
+        theme(plot.title = element_text(hjust = 0.5, size = 14))
+
+grid.arrange(plot2)
+
+```
+
+# figure for functional connectivity
+```{r}
+data_file <- file.path(
+  base_dir,
+  "table_for_figures_fullnetmats_schaefer_only",
+  "neu",
+  "avergae_schaefer.csv"
+)
+brain_data <- read.csv(data_file)
+#brain_data <- brain_data %>%
+#  mutate(across(c(estimate_neu, estimate_dep), abs))  
+
+data("schaefer17_300")
+schaefer_df <- as.data.frame(schaefer17_300)
+
+schaefer_map <- read.csv(
+  file.path(
+    base_dir,
+    "netmat_masks",
+    "schaefer_map.csv"
+  )
+)
+colnames(schaefer_map)[colnames(schaefer_map) == "name"] <- "region"
+colnames(schaefer_map)[colnames(schaefer_map) == "key"] <- "IDP"
+
+# merge csvs to have idp,roi,estimate match
+data <- merge(schaefer_map, schaefer_df, by = "region", all = TRUE)
+data <- merge(data,brain_data,by ="IDP",all=TRUE)
+
+data$sigdata1 <- ifelse(data$IDP %in% c(278, 284), 0.25, 0)
+data$sigdata2 <- ifelse(data$IDP %in% c(121, 136), 0.25, 0)
+
+plot2<-ggplot(data) +
+        geom_brain(atlas = schaefer17_300, aes(fill = sigdata1)) +
+        scale_fill_gradient2(low = "blue", high = "yellow", mid = "white", midpoint = 0, limit = c(-0.1, 0.25)) +
+        theme_void() +
+  guides(fill = "none") +
+        theme(plot.title = element_text(hjust = 0.5, size = 20))
+plot3<-ggplot(data) +
+        geom_brain(atlas = schaefer17_300, aes(fill = sigdata2)) +
+        scale_fill_gradient2(low = "blue", high = "yellow", mid = "white", midpoint = 0, limit = c(-0.1, 0.25)) +
+        theme_void() +
+  guides(fill = "none") +
+        theme(plot.title = element_text(hjust = 0.5, size = 20))
+plot1<-ggplot(data) +
+        geom_brain(atlas = schaefer17_300, aes(fill = estimate)) +
+        scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0, limit = c(-0.1, 0.1)) +
+        theme_void() +
+  guides(fill = "none") +
+        theme(plot.title = element_text(hjust = 0.5, size = 20))
+grid.arrange(plot2,plot3,plot1)
+```
+
