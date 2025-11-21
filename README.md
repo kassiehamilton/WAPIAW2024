@@ -9,6 +9,18 @@ This repository contains the code for the analyses and visualization performed i
 
 CSVs containing the mapping of each node/region to Yeo networks. 
 
+# Visualization code (`code_for_figures`)
+
+## `brain_visual.Rmd`
+Generate individual brain plots to display meta-analytical estimates and corresponding significance for figure two using `ggseg` and `ggplot`
+
+## `combine_figures.py`
+Generate scatterplots and combine with individual brain plots to create figure two
+
+## `meta_violin.py`
+Create violin plots of meta-analysis estimates for figures three and four
+
+
 # Data availability
 * UKB data are available following an access application process: https://www.ukbiobank.ac.uk/enable-your-research/apply-for-access. This research was performed under UK Biobank application number 47267.
 * ABCD data was available from the NIMH Data Archive when data were obtained for this study.
