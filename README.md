@@ -6,6 +6,7 @@ This repository contains the code for the analyses and visualization performed i
 
 ## `maps`
 `functional_dictionary.csv` and `structural_dictionary_new.csv`
+
 CSVs containing the mapping of each node/region to Yeo networks. 
 
 # Data availability
