@@ -7,6 +7,9 @@ This repository contains the code for the analyses and visualization performed i
 ## `maps`
 `functional_dictionary.csv` and `structural_dictionary_new.csv`
 
+## `meta.py`
+Performs meta-analysis on outputs from individual dataset linear mixed effects regressions results (`regression.py`)
+
 CSVs containing the mapping of each node/region to Yeo networks. 
 
 # Visualization code (`code_for_figures`)
