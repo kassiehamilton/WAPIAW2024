@@ -1,9 +1,6 @@
 import os
 import numpy as np
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-import warnings
 from pymare import meta_regression
 from pymare import Dataset
 from pymare.estimators import VarianceBasedLikelihoodEstimator
