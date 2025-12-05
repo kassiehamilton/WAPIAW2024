@@ -86,7 +86,7 @@ def all_regressions(
         X_fit, 
         Y_fit, 
         conf, 
-        fit_type='lstsq', 
+        fit_type='lmer', 
         debug=False
         ):
     regress_list = []
@@ -117,7 +117,7 @@ def do_regression(
         X, 
         Y, 
         conf, 
-        fit_type='lstsq'
+        fit_type='lmer'
         ):
     # Extract column names for IDP and depression score
     #print(f'X columns: {X.columns}')
