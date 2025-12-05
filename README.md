@@ -4,13 +4,21 @@ This repository contains the code for the analyses and visualization performed i
 
 # Source Code
 
+## `regression.py`
+Perform within-dataset linear mixed effects regressions and output regression statistics (including coefficient, variance, and raw and FDR-corrected p-value) 
+
+## `utils_py/analysis.py`
+Includes helper functions used by `regression.py` which calculate statistics and run regression based on selected regression model
+
 ## `maps`
-`functional_dictionary.csv` and `structural_dictionary_new.csv`
+`functional_dictionary.csv` and `structural_dictionary_new.csv` 
+CSVs containing the mapping of each node/region to Yeo networks.
 
 ## `meta.py`
 Performs meta-analysis on outputs from individual dataset linear mixed effects regressions results (`regression.py`)
 
-CSVs containing the mapping of each node/region to Yeo networks. 
+## `ANOVA_notebook.ipynb`
+Perform all ANOVAs on meta-analysis outputs
 
 # Visualization code (`code_for_figures`)
 
