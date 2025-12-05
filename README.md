@@ -15,7 +15,7 @@ Includes helper functions used by `regression.py` which calculate statistics and
 CSVs containing the mapping of each node/region to Yeo networks.
 
 ## `meta.py`
-Performs meta-analysis on outputs from individual dataset linear mixed effects regressions results (`regression.py`)
+Perform meta-analysis on outputs from individual dataset linear mixed effects regressions results (`regression.py`)
 
 ## `ANOVA_notebook.ipynb`
 Perform all ANOVAs on meta-analysis outputs
@@ -31,6 +31,32 @@ Generate scatterplots and combine with individual brain plots to create figure t
 ## `meta_violin.py`
 Create violin plots of meta-analysis estimates for figures three and four
 
+# Code dependencies
+This repository leverages several Python and R packages. Dependencies are listed below by script.
+
+## General Use
+* [numpy] (https://numpy.org/)
+* [pandas] (https://pandas.pydata.org/)
+
+## Linear Mixed-Effects Regression (`regression.py` and `analysis.py`)
+* [sklearn-lmer] (https://pypi.org/project/sklearn-lmer/)
+* [scipy] (https://scipy.org/)
+* [scikit-learn] (https://scikit-learn.org/stable/)
+* [statsmodels] (https://www.statsmodels.org/stable/index.html)
+
+## Meta-analysis (`meta.py`)
+* [pymare] (https://pymare.readthedocs.io/en/latest/)
+* [statsmodels] (https://www.statsmodels.org/stable/index.html)
+
+## ANOVAs (`ANOVA_notebook.ipynb`)
+* [scipy] (https://scipy.org/)
+* [statsmodels] (https://www.statsmodels.org/stable/index.html)
+
+Visualizations (`code_for_figures/`)
+* [ggseg] (https://ggseg.r-universe.dev)
+* [ggplot] (https://ggplot2.tidyverse.org/)
+* [matplotlib] (https://matplotlib.org/)
+* [seaborn] (https://seaborn.pydata.org/)
 
 # Data availability
 * UKB data are available following an access application process: https://www.ukbiobank.ac.uk/enable-your-research/apply-for-access. This research was performed under UK Biobank application number 47267.
