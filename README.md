@@ -55,7 +55,7 @@ This repository leverages several Python and R packages. Dependencies are listed
 * [scipy] (https://scipy.org/)
 * [statsmodels] (https://www.statsmodels.org/stable/index.html)
 
-Visualizations (`code_for_figures/`)
+## Visualizations (`code_for_figures/`)
 * [ggseg] (https://ggseg.r-universe.dev)
 * [ggplot] (https://ggplot2.tidyverse.org/)
 * [matplotlib] (https://matplotlib.org/)
