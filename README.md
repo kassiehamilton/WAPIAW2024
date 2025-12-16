@@ -20,6 +20,9 @@ Perform meta-analysis on outputs from individual dataset linear mixed effects re
 ## `ANOVA_notebook.ipynb`
 Perform all ANOVAs on meta-analysis outputs
 
+## `heterogeneity_test.py`
+Perform three statistical tests, namely the Cochran's Q statistic (weighted sum of squared differences between individual study effects and the pooled effect across studies), I2 index (percentage of total variation across studies that is due to heterogeneity rather than chance), and Tau2 (estimates the true variability between the effect sizes of included studies).
+
 # Visualization code (`code_for_figures`)
 
 ## `brain_visual.Rmd`
