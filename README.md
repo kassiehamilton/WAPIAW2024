@@ -67,4 +67,10 @@ This repository leverages several Python and R packages. Dependencies are listed
 * HCP-A, HCP-D, and ANXPE (referred to as Dimensional Connectomics of Anxious Misery [DCAM]) data are available from the NIMH Data Archive collectively under the header of ‘CCF Data from the Human Connectome Projects’.
 * HCP-YA data are available from the connectomeDB: https://db.humanconnectome.org/.
 
+# Data preprocessing
+All data was preprocessed according to dataset preprocessing pipelines.
+* [UK Biobank preprocessing pipeline] (https://git.fmrib.ox.ac.uk/falmagro/UK_biobank_pipeline_v_1)
+* [HCP preprocessing pipeline (includes HCP-A, HCP-D, HCP-YA, and ANXPE)] (https://github.com/Washington-University/HCPpipelines)
+* [ABCD-BIDS pipeline] (https://github.com/ABCD-STUDY/abcd-hcp-pipeline)
+
 
