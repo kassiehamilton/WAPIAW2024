@@ -68,9 +68,19 @@ This repository leverages several Python and R packages. Dependencies are listed
 * HCP-YA data are available from the connectomeDB: https://db.humanconnectome.org/.
 
 # Data preprocessing
-All data was preprocessed according to dataset preprocessing pipelines.
-* [UK Biobank preprocessing pipeline](https://git.fmrib.ox.ac.uk/falmagro/UK_biobank_pipeline_v_1)
-* [HCP preprocessing pipeline (includes HCP-A, HCP-D, HCP-YA, and ANXPE)](https://github.com/Washington-University/HCPpipelines)
-* [ABCD-BIDS pipeline](https://github.com/ABCD-STUDY/abcd-hcp-pipeline)
+Data preprocessing was performed with the following external code repositories:
+* UK Biobank:
+  * Paper:
+    * Alfaro-Almagro, F., Jenkinson, M., Bangerter, N. K., Andersson, J. L. R., Griffanti, L., Douaud, G., Sotiropoulos, S. N., Jbabdi, S., Hernandez-Fernandez, M., Vallee, E., Vidaurre, D., Webster, M., McCarthy, P., Rorden, C., Daducci, A., Alexander, D. C., Zhang, H., Dragonu, I., Matthews, P. M., … Smith, S. M. (2018). Image processing and Quality Control for the first 10,000 brain imaging datasets from UK Biobank. NeuroImage, 166, 400–424. https://doi.org/10.1016/j.neuroimage.2017.10.034 
+  * Code:
+    * https://git.fmrib.ox.ac.uk/falmagro/UK_biobank_pipeline_v_1 
+* ABCD
+  * Paper:
+    * Feczko, E., Conan, G., Marek, S., Tervo-Clemmens, B., Cordova, M., Doyle, O., Earl, E., Perrone, A., Sturgeon, D., Klein, R., Harman, G., Kilamovich, D., Hermosillo, R., Miranda-Dominguez, O., Adebimpe, A., Bertolero, M., Cieslak, M., Covitz, S., Hendrickson, T., … Fair, D. A. (2021). Adolescent brain cognitive development (ABCD) community MRI collection and utilities. In bioRxiv (p. 2021.07.09.451638). bioRxiv. https://doi.org/10.1101/2021.07.09.451638 
+  * Code: https://docs.abcdstudy.org/latest/documentation/imaging/abcc_pipeline.html 
+* HCP (young adult, aging, developing, ANXPE)
+  * Paper:
+Glasser, M. F., Sotiropoulos, S. N., Wilson, J. A., Coalson, T. S., Fischl, B., Andersson, J. L., Xu, J., Jbabdi, S., Webster, M., Polimeni, J. R., Van Essen, D. C., Jenkinson, M., & WU-Minn HCP Consortium. (2013). The minimal preprocessing pipelines for the Human Connectome Project. NeuroImage, 80, 105–124. https://doi.org/10.1016/j.neuroimage.2013.04.127
+  * Code: https://github.com/Washington-University/HCPpipelines
 
 
